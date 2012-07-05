@@ -22,14 +22,15 @@ def main(op_dir, op_val):
     ser.close()
 
 def usage():
-	print 'Usage: %s DIRECTION OFFSET' % (sys.argv[0])
-	print 'DIRECTION: 1=left, 2=right'
+    print 'Usage: %s DIRECTION OFFSET' % (sys.argv[0])
+    print 'DIRECTION: 1=Counterclockwise, 2=Clockwise'
+    print 'OFFSET: Rotate degree(0~180), ignore offset exceed limit.'
 
 if __name__ == "__main__":
-	if len(sys.argv) != 3:
-		usage()
-		sys.exit(0)
-	op_dir = int(sys.argv[1])
-	op_val = int(sys.argv[2])
-	main(op_dir, op_val)
+    if len(sys.argv) != 3:
+        usage()
+        sys.exit(0)
+    op_dir = int(sys.argv[1])
+    op_val = int(sys.argv[2])
+    main(op_dir, op_val)
 
