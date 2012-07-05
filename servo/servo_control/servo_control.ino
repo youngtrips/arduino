@@ -31,28 +31,28 @@ void loop()
         Serial.readBytes(buf,2);
         dir = byte(buf[0]);
         val = byte(buf[1]);
-        //Serial.println(dir);
-        //Serial.println(val);
        
 		switch(dir) {
 			case DIR_L:
 				if (pos - val >= MIN_D) {
 					pos -= val;
 					servo.write(pos);
-
-                    //Serial.write(pos);
-				} 
+                    Serial.println(pos);
+				} else {
+                    Serial.println("new degreen is too smaller than MIN_D");
+                }
 				break;
 			case DIR_R:
 				if (pos + val <= MAX_D) {
 					pos += val;
 					servo.write(pos);
-
-                    //Serial.write(pos);
-				}
+                    Serial.println(pos);
+				} else {
+                    Serial.println("new degreen is too larger than MAX_D");
+                }
 				break;
             default:
-                //Serial.write(ERROR_DIR);
+                Serial.println("Invalid direction value");
                 break;
 		}
     }

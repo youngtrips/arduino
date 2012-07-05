@@ -19,6 +19,7 @@ def main(op_dir, op_val):
     val = (op_dir << 16) | op_val
     msg = struct.pack('BB', op_dir, op_val)
     ret = ser.write(msg)
+    print ser.readline()
     ser.close()
 
 def usage():
