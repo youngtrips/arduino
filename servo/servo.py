@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
 # Author: youngtrips(youngtrips@gmail.com)
@@ -9,14 +10,16 @@
 import serial
 import struct
 import sys
+import time
 
-SERIAL_PORT = "COM3"
+SERIAL_PORT = "/dev/ttyUSB0"
 
 def main(op_dir, op_val):
-	ser = serial.Serial(SERIAL_PORT, 9600, timeout=1)
-	msg = struct.pack('BB', op_dir, op_val)
-	print ser.write(msg)
-	ser.close()
+    ser = serial.Serial(SERIAL_PORT, 9600)
+    val = (op_dir << 16) | op_val
+    msg = struct.pack('BB', op_dir, op_val)
+    ret = ser.write(msg)
+    ser.close()
 
 def usage():
 	print 'Usage: %s DIRECTION OFFSET' % (sys.argv[0])

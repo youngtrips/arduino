@@ -8,11 +8,15 @@
 
 #define SERVO_PIN 9
 
+#define ERROR_DIR -1
+#define ERROR_OFFSET -2
+
+
 Servo servo;
 int pos = 80;
-
-byte val;
-byte dir;
+byte val = 0;
+byte dir = 0;
+char buf[2];
 
 void setup()
 {
@@ -24,23 +28,32 @@ void setup()
 void loop()
 {
     if (Serial.available() > 0) {
-        dir = Serial.read();
-        val = Serial.read();
+        Serial.readBytes(buf,2);
+        dir = byte(buf[0]);
+        val = byte(buf[1]);
+        //Serial.println(dir);
+        //Serial.println(val);
+       
 		switch(dir) {
 			case DIR_L:
 				if (pos - val >= MIN_D) {
 					pos -= val;
 					servo.write(pos);
-                                        Serial.print(pos);
-				}
+
+                    //Serial.write(pos);
+				} 
 				break;
 			case DIR_R:
 				if (pos + val <= MAX_D) {
 					pos += val;
 					servo.write(pos);
-                                        Serial.print(pos);
+
+                    //Serial.write(pos);
 				}
 				break;
+            default:
+                //Serial.write(ERROR_DIR);
+                break;
 		}
     }
 }
