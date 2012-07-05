@@ -1,4 +1,10 @@
-#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+# Author: youngtrips(youngtrips@gmail.com)
+# Created Time:  2012-07-04
+# File Name: servo.py
+# Description: 
+#
 
 import serial
 import struct
